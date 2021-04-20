@@ -5,8 +5,8 @@
 
 ## Desktop Version
 
-![desktop](./images/desktop.png)
+![desktop](./src/images/desktop.png)
 
 ## Mobile Version
 
-![mobile](./images/mobile.png)
+![mobile](./src/images/mobile.png)
