@@ -9,7 +9,9 @@ class App extends Component {
     city: "",
     weatherData: "",
     unit: "metric",
-    icon: <WiCelsius />,
+    icon: <WiFahrenheit />,
+    isCity: false,
+    error: "",
   };
   fetchApi = (city, unit) => {
     fetch(
@@ -17,12 +19,23 @@ class App extends Component {
     )
       .then((res) => res.json())
 
-      .then((data) =>
-        this.setState({
-          weatherData: data,
-        })
-      )
-      .catch((error) => console.log(error));
+      .then((data) => {
+        if (data.cod !== "404")
+          this.setState({
+            weatherData: data,
+            isCity: true,
+            error: "",
+          });
+        else {
+          this.setState({
+            error: "City not  found",
+          });
+        }
+      })
+      .catch((error) => {
+        console.log("city not found");
+        console.log(error);
+      });
   };
 
   inputHandler = (e) => {
@@ -32,6 +45,7 @@ class App extends Component {
   };
   submitHandler = (e) => {
     e.preventDefault();
+    if (!this.state.city) return;
     this.fetchApi(this.state.city, this.state.unit);
   };
   tempChangeHandler = () => {
@@ -39,15 +53,13 @@ class App extends Component {
     if (this.state.unit === "metric") {
       this.setState({
         unit: "imperial",
-        icon: <WiFahrenheit />,
+        icon: <WiCelsius />,
       });
-      // this.fetchApi(this.state.city, this.state.unit);
     } else if (this.state.unit === "imperial") {
       this.setState({
         unit: "metric",
-        icon: <WiCelsius />,
+        icon: <WiFahrenheit />,
       });
-      // this.fetchApi(this.state.city, this.state.unit);
     }
   };
 
@@ -59,6 +71,7 @@ class App extends Component {
           <h1>Weather App</h1>
           <div className="search">
             <input
+              value={this.state.city}
               onChange={this.inputHandler}
               type="text"
               placeholder="City"
@@ -66,12 +79,15 @@ class App extends Component {
             <button onClick={this.submitHandler}>Search</button>
           </div>
         </div>
-        <WeatherData
-          data={this.state.weatherData}
-          tempChangeHandler={this.tempChangeHandler}
-          icon={this.state.icon}
-          type={this.state.unit}
-        />
+        {this.state.isCity && (
+          <WeatherData
+            data={this.state.weatherData}
+            tempChangeHandler={this.tempChangeHandler}
+            icon={this.state.icon}
+            type={this.state.unit}
+          />
+        )}
+        {!!this.state.error && <h1> {this.state.error} </h1>}
       </div>
     );
   }
