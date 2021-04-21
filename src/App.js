@@ -15,7 +15,7 @@ class App extends Component {
   };
   fetchApi = (city, unit) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=6147110ad6ebb0173b54f294d10a5372&units=${unit}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_WEATHER_API}&units=${unit}`
     )
       .then((res) => res.json())
 
