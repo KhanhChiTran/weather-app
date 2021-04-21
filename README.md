@@ -1,5 +1,7 @@
 # React Weather App
 
+[Live Demo](https://chitran-weatherapp.netlify.app/)
+
 1. Search by City name
 2. Convert C to F
 
