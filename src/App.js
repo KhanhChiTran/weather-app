@@ -49,7 +49,6 @@ class App extends Component {
     this.fetchApi(this.state.city, this.state.unit);
   };
   tempChangeHandler = () => {
-    console.log("change .... click");
     if (this.state.unit === "metric") {
       this.setState({
         unit: "imperial",
@@ -69,15 +68,15 @@ class App extends Component {
       <div className="App">
         <div className="search-wrap">
           <h1>Weather App</h1>
-          <div className="search">
+          <form onSubmit={this.submitHandler} className="search">
             <input
               value={this.state.city}
               onChange={this.inputHandler}
               type="text"
               placeholder="City"
             />
-            <button onClick={this.submitHandler}>Search</button>
-          </div>
+            <button type="submit">Search</button>
+          </form>
         </div>
         {this.state.isCity && (
           <WeatherData
