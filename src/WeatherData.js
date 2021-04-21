@@ -12,6 +12,7 @@ const WeatherData = ({ data, tempChangeHandler, icon, type }) => {
     <div className="weather-show">
       <img
         src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png `}
+        alt="pic"
       />
       <h3>{data.weather[0].main} </h3>
       <div className="temp">
