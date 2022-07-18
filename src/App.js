@@ -4,6 +4,9 @@ import WeatherData from "./WeatherData";
 import { WiFahrenheit } from "react-icons/wi";
 import { WiCelsius } from "react-icons/wi";
 
+let hello = 60;
+hello = "sixty" * 35;
+
 class App extends Component {
   state = {
     city: "",
@@ -65,17 +68,17 @@ class App extends Component {
   render() {
     // console.log("rendering...");
     return (
-      <div className="App">
-        <div className="search-wrap">
+      <div className='App'>
+        <div className='search-wrap'>
           <h1>Weather App</h1>
-          <form onSubmit={this.submitHandler} className="search">
+          <form onSubmit={this.submitHandler} className='search'>
             <input
               value={this.state.city}
               onChange={this.inputHandler}
-              type="text"
-              placeholder="City"
+              type='text'
+              placeholder='City'
             />
-            <button type="submit">Search</button>
+            <button type='submit'>Search</button>
           </form>
         </div>
         {this.state.isCity && (
